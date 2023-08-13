@@ -1,0 +1,47 @@
+#!/usr/bin/python3
+
+# --- Imports --- #
+import argparse
+import arduino_iface
+
+# --- Contants --- #
+ARDUINO_SERVER_ENDPOINT_DFLT = "tcp://*:4555"
+ARDUINO_SERVER_SERIAL_DFLT = "/dev/ttyACM0"
+ARDUINO_SERVER_SERIAL_BAUDRATE_DFLT = 9600
+
+# --- Arg parser --- #
+def _parse_args():
+    parser = argparse.ArgumentParser()
+    parser.add_argument(
+        "-e",
+        "--endpoint",
+        help="Server endpoint",
+        type=str,
+        default=ARDUINO_SERVER_ENDPOINT_DFLT
+    )
+
+    parser.add_argument(
+        "-s",
+        "--serial_port",
+        help="Serial port connected to the Arduino board",
+        type=str,
+        default=ARDUINO_SERVER_SERIAL_DFLT
+    )
+
+    parser.add_argument(
+        "--baudrate",
+        help="Serial port baudrate",
+        type=str,
+        default=ARDUINO_SERVER_SERIAL_BAUDRATE_DFLT
+    )
+
+    return parser.parse_args()
+
+def main():
+    args = _parse_args()
+
+    server = arduino_iface.ArduinoServer(args.endpoint, args.serial_port, args.baudrate)
+    server.run()
+
+if __name__ == '__main__':
+    main()
