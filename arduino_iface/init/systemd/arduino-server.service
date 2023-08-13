@@ -1,0 +1,11 @@
+[Unit]
+Description=Arduino Server
+After=multi-user.target
+
+[Service]
+Type=simple
+Restart=always
+ExecStart=/path/to/arduino_server
+
+[Install]
+WantedBy=multi-user.target
