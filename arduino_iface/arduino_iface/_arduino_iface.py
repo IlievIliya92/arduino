@@ -2,6 +2,7 @@
 import sys
 import zmq
 import json
+import time
 import serial
 import signal
 import logging
@@ -35,6 +36,7 @@ class SerialIO():
     def __init__(self, port: str, baudrate: int):
         self.log = logger_get("serial_io")
         self.ser = serial.Serial(port=port, baudrate=baudrate, timeout=10)
+        time.sleep(5)
 
     def __del__(self):
         self.ser.close()
@@ -111,7 +113,7 @@ class ArduinoServer():
 
     def run(self) -> None:
         items = []
-        self.log.info("Starting server...")
+        self.log.info("Server awaiting for new requests ...")
         while not self.stop_server.is_set():
             try:
                 # Ge the items list
@@ -129,27 +131,32 @@ class ArduinoServer():
                 response = {}
                 request_raw = self.socket.recv()
                 request = str_to_JSON(request_raw.decode())
-
+                self.log.debug(f"Request: {request}")
 
                 cmd_id = request['id']
                 if cmd_id not in ARDUINO_CMDS.keys():
-                    response = self.format_response("Error", f"Invalid cmd id: {cmd_id}")
+                    response = self.format_response("error", f"Invalid cmd id: {cmd_id}")
 
                 # Send the command to Arduino
                 arduino_req = ARDUINO_CMDS[cmd_id]['req']
+
                 try:
                     if 'value' in request.keys():
-                        arduino_req.format(value=ARDUINO_CMDS[cmd_id][request['value']])
+                        arduino_req = arduino_req.format(value=ARDUINO_CMDS[cmd_id]['value'][request['value']])
+
+                    self.log.debug(f"Arduino Serial Request: {arduino_req}")
                     self.serial.write(arduino_req)
                     arduino_res = self.serial.read()
+                    self.log.debug(f"Arduino Serial Response: {arduino_res}")
                 except ValueError as err:
-                    response = self.format_response("Error", f"Failed to send cmd: {err}!")
+                    response = self.format_response("error", f"Failed to send cmd: {err}!")
 
                 if arduino_res == "-1":
-                    response = self.format_response("Error", f"Command failed!")
+                    response = self.format_response("error", f"Command failed!")
                 else:
-                    response = self.format_response("Ok", arduino_res)
+                    response = self.format_response("ok", arduino_res)
 
+                self.log.debug(f"Response: {response}")
                 response_raw = JSON_to_str(response).encode()
                 self.socket.send(response_raw)
 
@@ -159,7 +166,7 @@ class ArduinoClient():
         super().__init__()
         context = zmq.Context()
         self.socket = context.socket(zmq.REQ)
-        self.socket.RCVTIMEO = 1000 # in milliseconds
+        self.socket.RCVTIMEO = 10000 # in milliseconds
         self.socket.connect(endpoint)
         self.log = logger_get("client")
 
