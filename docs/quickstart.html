@@ -1,0 +1,245 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+  <meta charset="utf-8" /><meta name="generator" content="Docutils 0.18.1: http://docutils.sourceforge.net/" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>QuickStart &mdash; XDP Interface</title>
+      <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+      <link rel="stylesheet" href="_static/css/theme.css" type="text/css" />
+      <link rel="stylesheet" href="_static/copybutton.css" type="text/css" />
+      <link rel="stylesheet" href="_static/tabs.css" type="text/css" />
+      <link rel="stylesheet" href="_static/design-style.1e8bd061cd6da7fc9cf755528e8ffc24.min.css" type="text/css" />
+  <!--[if lt IE 9]>
+    <script src="_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+        <script src="_static/jquery.js"></script>
+        <script src="_static/_sphinx_javascript_frameworks_compat.js"></script>
+        <script data-url_root="./" id="documentation_options" src="_static/documentation_options.js"></script>
+        <script src="_static/doctools.js"></script>
+        <script src="_static/sphinx_highlight.js"></script>
+        <script src="_static/clipboard.min.js"></script>
+        <script src="_static/copybutton.js"></script>
+        <script src="_static/tabs.js"></script>
+        <script src="_static/design-tabs.js"></script>
+    <script src="_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="next" title="Client API" href="client_api/index.html" />
+    <link rel="prev" title="Arduino Project" href="index.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search"  style="background: rgba(52,49,49,1) 100%;" >
+
+          
+          
+          <a href="index.html" class="icon icon-home">
+            Arduino UNO Project
+          </a>
+              <div class="version">
+                v.1.0.0
+              </div>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption" role="heading"><span class="caption-text">Usage</span></p>
+<ul class="current">
+<li class="toctree-l1 current"><a class="current reference internal" href="#">QuickStart</a></li>
+<li class="toctree-l1"><a class="reference internal" href="client_api/index.html">Client API</a></li>
+<li class="toctree-l1"><a class="reference internal" href="examples.html">Examples</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Development</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="contributing/index.html">Contributing</a></li>
+<li class="toctree-l1"><a class="reference internal" href="changelog.html">Changelog</a></li>
+<li class="toctree-l1"><a class="reference internal" href="license.html">License</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Support</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="support.html">Support</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu"  style="background: rgba(52,49,49,1) 100%;" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="index.html">Arduino UNO Project</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content style-external-links">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="index.html" class="icon icon-home" aria-label="Home"></a></li>
+      <li class="breadcrumb-item active">QuickStart</li>
+      <li class="wy-breadcrumbs-aside">
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <style>
+    .img__wrap {
+        border: 1px solid;
+        padding: 10px;
+        box-shadow: 18px 5px 10px #888888;
+    }
+</style>
+<section id="quickstart">
+<h1><a class="toc-backref" href="#id2" role="doc-backlink">QuickStart</a><a class="headerlink" href="#quickstart" title="Permalink to this heading"></a></h1>
+<nav class="contents" id="contents">
+<p class="topic-title">Contents</p>
+<ul class="simple">
+<li><p><a class="reference internal" href="#quickstart" id="id2">QuickStart</a></p>
+<ul>
+<li><p><a class="reference internal" href="#setup" id="id3">Setup</a></p>
+<ul>
+<li><p><a class="reference internal" href="#components" id="id4">Components</a></p></li>
+<li><p><a class="reference internal" href="#schematic" id="id5">Schematic</a></p></li>
+</ul>
+</li>
+<li><p><a class="reference internal" href="#arduino" id="id6">Arduino</a></p>
+<ul>
+<li><p><a class="reference internal" href="#dependencies" id="id7">Dependencies</a></p></li>
+<li><p><a class="reference internal" href="#id1" id="id8">Setup</a></p></li>
+</ul>
+</li>
+<li><p><a class="reference internal" href="#arduino-server" id="id9">Arduino Server</a></p></li>
+</ul>
+</li>
+</ul>
+</nav>
+<section id="setup">
+<h2><a class="toc-backref" href="#id3" role="doc-backlink">Setup</a><a class="headerlink" href="#setup" title="Permalink to this heading"></a></h2>
+<section id="components">
+<h3><a class="toc-backref" href="#id4" role="doc-backlink">Components</a><a class="headerlink" href="#components" title="Permalink to this heading"></a></h3>
+<ul class="simple">
+<li><p><a class="reference external" href="https://elimex.bg/product/71190-kit-k2000-razvoyna-platka-s-atmega-328p">Arduino UNO (Atmega-328p)</a></p></li>
+<li><p><a class="reference external" href="https://elimex.bg/product/85024-kit-k2238-ir-predavatelen-modyl-38khz?fbclid=IwAR3VVIv3W75pLZJC_mgmLN6cP2sbzGf1MBW3TK8MSVMtoTuQ6K2VncmCztQ">IR Emitter</a></p></li>
+<li><p><a class="reference external" href="https://elimex.bg/product/74794-kit-k2056-ir-priemen-modul-38khz?fbclid=IwAR3WbpsbBnQvC3e3oVXj26KnxDGqICMOeUiHXHCe56j38m88hdxKyFofgYA">IR Receiver</a></p></li>
+<li><p><a class="reference external" href="https://elimex.bg/product/77710-kit-k2168-1x4-matrichna-klaviatura-s-4-butonapanelen-tip?fbclid=IwAR3VVIv3W75pLZJC_mgmLN6cP2sbzGf1MBW3TK8MSVMtoTuQ6K2VncmCztQ">1x4 Keypad</a></p></li>
+<li><p><a class="reference external" href="https://elimex.bg/product/74793-kit-k2055-fotorezistoren-datchik?fbclid=IwAR3VVIv3W75pLZJC_mgmLN6cP2sbzGf1MBW3TK8MSVMtoTuQ6K2VncmCztQ">Photo Resistor</a></p></li>
+<li><p><a class="reference external" href="https://elimex.bg/product/71202-kit-k2015-pir-%E2%80%93-senzor-za-dvizhenie">PIR Sensor</a></p></li>
+</ul>
+</section>
+<section id="schematic">
+<h3><a class="toc-backref" href="#id5" role="doc-backlink">Schematic</a><a class="headerlink" href="#schematic" title="Permalink to this heading"></a></h3>
+<p>Wire the compoments using the schematic shown below:</p>
+<img class="img__wrap" src="_static/schematic.png" />
+</section>
+</section>
+<section id="arduino">
+<h2><a class="toc-backref" href="#id6" role="doc-backlink">Arduino</a><a class="headerlink" href="#arduino" title="Permalink to this heading"></a></h2>
+<section id="dependencies">
+<h3><a class="toc-backref" href="#id7" role="doc-backlink">Dependencies</a><a class="headerlink" href="#dependencies" title="Permalink to this heading"></a></h3>
+<ul class="simple">
+<li><p><a class="reference external" href="https://www.arduino.cc/reference/en/libraries/irremote/">IRremote Arduino library</a></p></li>
+</ul>
+</section>
+<section id="id1">
+<h3><a class="toc-backref" href="#id8" role="doc-backlink">Setup</a><a class="headerlink" href="#id1" title="Permalink to this heading"></a></h3>
+<ol class="arabic simple">
+<li><p>Load the sketch file</p></li>
+</ol>
+<p>Using the <a class="reference external" href="https://docs.arduino.cc/software/ide-v1/tutorials/Linux">Arduino IDE</a> load the sketch file <code class="docutils literal notranslate"><span class="pre">sketch.ino</span></code>
+which resides in the <code class="docutils literal notranslate"><span class="pre">sketch</span></code> directory.</p>
+<img class="img__wrap" src="_static/0_load.png" />
+<ol class="arabic simple" start="2">
+<li><p>Verify (build)</p></li>
+</ol>
+<img class="img__wrap" src="_static/1_build.png" />
+<ol class="arabic simple" start="3">
+<li><p>Flash</p></li>
+</ol>
+<img class="img__wrap" src="_static/2_flash.png" />
+<ol class="arabic simple" start="4">
+<li><p>Test</p></li>
+</ol>
+<p>Test the setup using the integrated serial monitor by sending <code class="docutils literal notranslate"><span class="pre">3</span></code> to the target board
+which should result in returning the value read by the photo resistor.</p>
+<img class="img__wrap" src="_static/3_test.png" />
+</section>
+</section>
+<section id="arduino-server">
+<h2><a class="toc-backref" href="#id9" role="doc-backlink">Arduino Server</a><a class="headerlink" href="#arduino-server" title="Permalink to this heading"></a></h2>
+<ol class="arabic simple">
+<li><p>Install</p></li>
+</ol>
+<p>To install the python package containg the Arduino server:</p>
+<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="go">cd arduino_iface</span>
+<span class="go">pip3 install .</span>
+</pre></div>
+</div>
+<ol class="arabic simple" start="2">
+<li><p>Start the server</p></li>
+</ol>
+<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="go">arduino_server --serial_port &lt;path_to_arduino_serial_port&gt;</span>
+</pre></div>
+</div>
+<ol class="arabic simple" start="3">
+<li><p>Test</p></li>
+</ol>
+<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="go">cd arduino_iface/test</span>
+<span class="go">pytest -vv</span>
+</pre></div>
+</div>
+<p>Optionally you can install the Arduino Server as a SystemD service using the example
+file provided in the <code class="docutils literal notranslate"><span class="pre">arduino_iface/init/systemd</span></code> direcotry.</p>
+<p><strong>This file requires the following modifications:</strong></p>
+<p>Change <code class="docutils literal notranslate"><span class="pre">&#64;&#64;__USER__&#64;&#64;</span></code> and <code class="docutils literal notranslate"><span class="pre">&#64;&#64;__GROUP__&#64;&#64;</span></code> accordingly. You can ge this information by using the <code class="docutils literal notranslate"><span class="pre">whoami</span></code> command.</p>
+<p>Change <code class="docutils literal notranslate"><span class="pre">&#64;&#64;__PATH_TO_ARDUINO_SERVER_DIR__&#64;&#64;/arduino_server</span></code> to the correct path where the binary has been installed. You can get this infromation by using the <code class="docutils literal notranslate"><span class="pre">which</span> <span class="pre">rduino_server</span></code> command.</p>
+<p>To get the correct path for the serial port look for the Arduino device in the  <code class="docutils literal notranslate"><span class="pre">/dev/serial/by-id/</span></code> directory.</p>
+<p>Once the file has benn modified copy it in the <em>/etc/systemd/system/</em> directory and start the service using the commands below:</p>
+<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="go">sudo systemctl start arduino-server.service</span>
+<span class="go">sudo systemctl enable arduino-server.service</span>
+</pre></div>
+</div>
+</section>
+</section>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="index.html" class="btn btn-neutral float-left" title="Arduino Project" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="client_api/index.html" class="btn btn-neutral float-right" title="Client API" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2023, Iliya Iliev.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

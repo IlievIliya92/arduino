@@ -1,0 +1,440 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+  <meta charset="utf-8" /><meta name="generator" content="Docutils 0.18.1: http://docutils.sourceforge.net/" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Client API &mdash; XDP Interface</title>
+      <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+      <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
+      <link rel="stylesheet" href="../_static/copybutton.css" type="text/css" />
+      <link rel="stylesheet" href="../_static/tabs.css" type="text/css" />
+      <link rel="stylesheet" href="../_static/design-style.1e8bd061cd6da7fc9cf755528e8ffc24.min.css" type="text/css" />
+  <!--[if lt IE 9]>
+    <script src="../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+        <script src="../_static/jquery.js"></script>
+        <script src="../_static/_sphinx_javascript_frameworks_compat.js"></script>
+        <script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js"></script>
+        <script src="../_static/doctools.js"></script>
+        <script src="../_static/sphinx_highlight.js"></script>
+        <script src="../_static/clipboard.min.js"></script>
+        <script src="../_static/copybutton.js"></script>
+        <script src="../_static/tabs.js"></script>
+        <script src="../_static/design-tabs.js"></script>
+    <script src="../_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="Examples" href="../examples.html" />
+    <link rel="prev" title="QuickStart" href="../quickstart.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search"  style="background: rgba(52,49,49,1) 100%;" >
+
+          
+          
+          <a href="../index.html" class="icon icon-home">
+            Arduino UNO Project
+          </a>
+              <div class="version">
+                v.1.0.0
+              </div>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption" role="heading"><span class="caption-text">Usage</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../quickstart.html">QuickStart</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">Client API</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../examples.html">Examples</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Development</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../contributing/index.html">Contributing</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../changelog.html">Changelog</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../license.html">License</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Support</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../support.html">Support</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu"  style="background: rgba(52,49,49,1) 100%;" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../index.html">Arduino UNO Project</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content style-external-links">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../index.html" class="icon icon-home" aria-label="Home"></a></li>
+      <li class="breadcrumb-item active">Client API</li>
+      <li class="wy-breadcrumbs-aside">
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <style>
+    .img__wrap {
+        border: 1px solid;
+        padding: 10px;
+        box-shadow: 18px 5px 10px #888888;
+    }
+</style>
+<section id="client-api">
+<h1>Client API<a class="headerlink" href="#client-api" title="Permalink to this heading"></a></h1>
+<section id="commands">
+<h2>Commands<a class="headerlink" href="#commands" title="Permalink to this heading"></a></h2>
+<section id="reset-state">
+<h3>Reset state<a class="headerlink" href="#reset-state" title="Permalink to this heading"></a></h3>
+<p><em>&#64;Brief:</em> Reset state of PIR &amp; button</p>
+<p><em>&#64;Request:</em></p>
+<table class="docutils align-default">
+<thead>
+<tr class="row-odd"><th class="head"><p>id</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>“clear_state”</p></td>
+</tr>
+</tbody>
+</table>
+<p><em>&#64;Response:</em></p>
+<table class="docutils align-default">
+<thead>
+<tr class="row-odd"><th class="head"><p>status</p></th>
+<th class="head"><p>value</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>“ok”</p></td>
+<td><p>0</p></td>
+</tr>
+<tr class="row-odd"><td><p>“error”</p></td>
+<td><p>“Error message”</p></td>
+</tr>
+</tbody>
+</table>
+<p><strong>Example Usage:</strong></p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">arduino_iface</span>
+
+<span class="n">client</span> <span class="o">=</span> <span class="n">arduino_iface</span><span class="o">.</span><span class="n">ArduinoClient</span><span class="p">(</span><span class="s2">&quot;tcp://127.0.0.1:4555&quot;</span><span class="p">)</span>
+<span class="n">res</span> <span class="o">=</span> <span class="n">client</span><span class="o">.</span><span class="n">send_cmd</span><span class="p">({</span><span class="s2">&quot;id&quot;</span><span class="p">:</span> <span class="s2">&quot;clear_state&quot;</span><span class="p">})</span>
+<span class="k">if</span> <span class="n">res</span><span class="p">[</span><span class="s1">&#39;status&#39;</span><span class="p">]</span> <span class="o">!=</span> <span class="s1">&#39;ok&#39;</span><span class="p">:</span>
+    <span class="nb">print</span><span class="p">(</span><span class="n">res</span><span class="p">[</span><span class="s1">&#39;value&#39;</span><span class="p">])</span>
+</pre></div>
+</div>
+</section>
+<section id="ir">
+<h3>IR<a class="headerlink" href="#ir" title="Permalink to this heading"></a></h3>
+<p><em>&#64;Brief:</em> Send an IR command</p>
+<p><em>&#64;Request:</em></p>
+<table class="docutils align-default">
+<thead>
+<tr class="row-odd"><th class="head"><p>id</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>“ir_set”</p></td>
+</tr>
+</tbody>
+</table>
+<table class="docutils align-default">
+<thead>
+<tr class="row-odd"><th class="head"><p>value</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>“intensityup”</p></td>
+</tr>
+<tr class="row-odd"><td><p>“intensitydown”</p></td>
+</tr>
+<tr class="row-even"><td><p>“off”</p></td>
+</tr>
+<tr class="row-odd"><td><p>“on”</p></td>
+</tr>
+<tr class="row-even"><td><p>“red”</p></td>
+</tr>
+<tr class="row-odd"><td><p>“green”</p></td>
+</tr>
+<tr class="row-even"><td><p>“blue”</p></td>
+</tr>
+<tr class="row-odd"><td><p>“white”</p></td>
+</tr>
+<tr class="row-even"><td><p>“rust”</p></td>
+</tr>
+<tr class="row-odd"><td><p>“palegreen”</p></td>
+</tr>
+<tr class="row-even"><td><p>“azure”</p></td>
+</tr>
+<tr class="row-odd"><td><p>“flash”</p></td>
+</tr>
+<tr class="row-even"><td><p>“redorange”</p></td>
+</tr>
+<tr class="row-odd"><td><p>“turquoise”</p></td>
+</tr>
+<tr class="row-even"><td><p>“eggplant”</p></td>
+</tr>
+<tr class="row-odd"><td><p>“strobe”</p></td>
+</tr>
+<tr class="row-even"><td><p>“orange”</p></td>
+</tr>
+<tr class="row-odd"><td><p>“emerald”</p></td>
+</tr>
+<tr class="row-even"><td><p>“purple”</p></td>
+</tr>
+<tr class="row-odd"><td><p>“fade”</p></td>
+</tr>
+<tr class="row-even"><td><p>“yellow”</p></td>
+</tr>
+<tr class="row-odd"><td><p>“jade”</p></td>
+</tr>
+<tr class="row-even"><td><p>“pink”</p></td>
+</tr>
+<tr class="row-odd"><td><p>“smooth” }</p></td>
+</tr>
+</tbody>
+</table>
+<p><em>&#64;Response:</em></p>
+<table class="docutils align-default">
+<thead>
+<tr class="row-odd"><th class="head"><p>status</p></th>
+<th class="head"><p>value</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>“ok”</p></td>
+<td><p>0</p></td>
+</tr>
+<tr class="row-odd"><td><p>“error”</p></td>
+<td><p>“Error message”</p></td>
+</tr>
+</tbody>
+</table>
+<p>The values are mapped 1:1 to IR button codes of the remote control  used to control an <a class="reference external" href="https://www.emag.bg/lenta-mercado-trade-dekorativna-led-lampichki-distancionno-cvetna-3m-423/pd/DGWSWRMBM/">LED strip</a>.</p>
+<p><strong>Example Usage:</strong></p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">arduino_iface</span>
+
+<span class="n">client</span> <span class="o">=</span> <span class="n">arduino_iface</span><span class="o">.</span><span class="n">ArduinoClient</span><span class="p">(</span><span class="s2">&quot;tcp://127.0.0.1:4555&quot;</span><span class="p">)</span>
+<span class="n">res</span> <span class="o">=</span> <span class="n">client</span><span class="o">.</span><span class="n">send_cmd</span><span class="p">({</span><span class="s2">&quot;id&quot;</span><span class="p">:</span> <span class="s2">&quot;ir_set&quot;</span><span class="p">,</span> <span class="s2">&quot;value&quot;</span><span class="p">:</span> <span class="s2">&quot;on&quot;</span><span class="p">})</span>
+<span class="n">res</span> <span class="o">=</span> <span class="n">client</span><span class="o">.</span><span class="n">send_cmd</span><span class="p">({</span><span class="s2">&quot;id&quot;</span><span class="p">:</span> <span class="s2">&quot;ir_set&quot;</span><span class="p">,</span> <span class="s2">&quot;value&quot;</span><span class="p">:</span> <span class="s2">&quot;green&quot;</span><span class="p">})</span>
+<span class="k">if</span> <span class="n">res</span><span class="p">[</span><span class="s1">&#39;status&#39;</span><span class="p">]</span> <span class="o">!=</span> <span class="s1">&#39;ok&#39;</span><span class="p">:</span>
+    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Err: </span><span class="si">{</span><span class="n">res</span><span class="p">[</span><span class="s1">&#39;value&#39;</span><span class="p">]</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>The IR received is disabled by default since it is used for debugging purpouses only.
+To enable it uncomment the <code class="docutils literal notranslate"><span class="pre">//</span> <span class="pre">#define</span> <span class="pre">ENABLE_IR_RECV</span></code> line from the <code class="docutils literal notranslate"><span class="pre">sketch.ino</span></code> file.</p>
+</div>
+</section>
+<section id="pir-get">
+<h3>PIR Get<a class="headerlink" href="#pir-get" title="Permalink to this heading"></a></h3>
+<p><em>&#64;Brief:</em> Retrieve the state of the PIR sensor, the state is cleared on read. Each detected motion
+is stored as a flag and it maintains its state until read by the user application.</p>
+<p><em>&#64;Request:</em></p>
+<table class="docutils align-default">
+<thead>
+<tr class="row-odd"><th class="head"><p>id</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>“pir_get”</p></td>
+</tr>
+</tbody>
+</table>
+<p><em>&#64;Response:</em></p>
+<table class="docutils align-default">
+<thead>
+<tr class="row-odd"><th class="head"><p>status</p></th>
+<th class="head"><p>value</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>“ok”</p></td>
+<td><p>0 (Motion not detected) / 1 (Motion detected)</p></td>
+</tr>
+<tr class="row-odd"><td><p>“error”</p></td>
+<td><p>“Error message”</p></td>
+</tr>
+</tbody>
+</table>
+<p><strong>Example Usage:</strong></p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">arduino_iface</span>
+
+<span class="n">res</span> <span class="o">=</span> <span class="n">client</span><span class="o">.</span><span class="n">send_cmd</span><span class="p">({</span><span class="s2">&quot;id&quot;</span><span class="p">:</span> <span class="s2">&quot;pir_get&quot;</span><span class="p">})</span>
+<span class="k">if</span> <span class="n">res</span><span class="p">[</span><span class="s1">&#39;status&#39;</span><span class="p">]</span> <span class="o">!=</span> <span class="s1">&#39;ok&#39;</span><span class="p">:</span>
+    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Err: </span><span class="si">{</span><span class="n">res</span><span class="p">[</span><span class="s1">&#39;value&#39;</span><span class="p">]</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+<span class="k">else</span><span class="p">:</span>
+    <span class="nb">print</span><span class="p">(</span><span class="nb">int</span><span class="p">(</span><span class="n">res</span><span class="p">[</span><span class="s1">&#39;value&#39;</span><span class="p">]))</span>
+</pre></div>
+</div>
+</section>
+<section id="luminosity-get">
+<h3>Luminosity Get<a class="headerlink" href="#luminosity-get" title="Permalink to this heading"></a></h3>
+<p><em>&#64;Brief:</em> Retrieve the current value meassured by the photo resistor sensor</p>
+<p><em>&#64;Request:</em></p>
+<table class="docutils align-default">
+<thead>
+<tr class="row-odd"><th class="head"><p>id</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>“luminosity_get”</p></td>
+</tr>
+</tbody>
+</table>
+<p><em>&#64;Response:</em></p>
+<table class="docutils align-default">
+<thead>
+<tr class="row-odd"><th class="head"><p>status</p></th>
+<th class="head"><p>value</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>“ok”</p></td>
+<td><p>[ “0” ; “1024” ] (Value of the photo resistor)</p></td>
+</tr>
+<tr class="row-odd"><td><p>“error”</p></td>
+<td><p>“Error message”</p></td>
+</tr>
+</tbody>
+</table>
+<p><strong>Example Usage:</strong></p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">arduino_iface</span>
+
+<span class="n">res</span> <span class="o">=</span> <span class="n">client</span><span class="o">.</span><span class="n">send_cmd</span><span class="p">({</span><span class="s2">&quot;id&quot;</span><span class="p">:</span> <span class="s2">&quot;luminosity_get&quot;</span><span class="p">})</span>
+<span class="k">if</span> <span class="n">res</span><span class="p">[</span><span class="s1">&#39;status&#39;</span><span class="p">]</span> <span class="o">!=</span> <span class="s1">&#39;ok&#39;</span><span class="p">:</span>
+    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Err: </span><span class="si">{</span><span class="n">res</span><span class="p">[</span><span class="s1">&#39;value&#39;</span><span class="p">]</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+<span class="k">else</span><span class="p">:</span>
+    <span class="nb">print</span><span class="p">(</span><span class="nb">int</span><span class="p">(</span><span class="n">res</span><span class="p">[</span><span class="s1">&#39;value&#39;</span><span class="p">]))</span>
+</pre></div>
+</div>
+</section>
+<section id="button-state-get">
+<h3>Button State Get<a class="headerlink" href="#button-state-get" title="Permalink to this heading"></a></h3>
+<p><em>&#64;Brief:</em> Retrieve the state of a button, the state is cleared on read. Each button
+press is stored as a flag and it maintains its state until read by the user application.</p>
+<p><em>&#64;Request:</em></p>
+<table class="docutils align-default">
+<thead>
+<tr class="row-odd"><th class="head"><p>id</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>“key_get”</p></td>
+</tr>
+</tbody>
+</table>
+<table class="docutils align-default">
+<thead>
+<tr class="row-odd"><th class="head"><p>value</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>“btn1”</p></td>
+</tr>
+<tr class="row-odd"><td><p>“btn2”</p></td>
+</tr>
+<tr class="row-even"><td><p>“btn3”</p></td>
+</tr>
+<tr class="row-odd"><td><p>“btn4”</p></td>
+</tr>
+</tbody>
+</table>
+<p><em>&#64;Response:</em></p>
+<table class="docutils align-default">
+<thead>
+<tr class="row-odd"><th class="head"><p>status</p></th>
+<th class="head"><p>value</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>“ok”</p></td>
+<td><p>0 (Key pressed) / 1 (Key IDLE)</p></td>
+</tr>
+<tr class="row-odd"><td><p>“error”</p></td>
+<td><p>“Error message”</p></td>
+</tr>
+</tbody>
+</table>
+<p><strong>Example Usage:</strong></p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">arduino_iface</span>
+<span class="n">res</span> <span class="o">=</span> <span class="n">client</span><span class="o">.</span><span class="n">send_cmd</span><span class="p">({</span><span class="s2">&quot;id&quot;</span><span class="p">:</span> <span class="s2">&quot;key_get&quot;</span><span class="p">,</span> <span class="s2">&quot;value&quot;</span><span class="p">:</span> <span class="s2">&quot;btn1&quot;</span><span class="p">})</span>
+
+<span class="k">if</span> <span class="n">res</span><span class="p">[</span><span class="s1">&#39;status&#39;</span><span class="p">]</span> <span class="o">!=</span> <span class="s1">&#39;ok&#39;</span><span class="p">:</span>
+    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Err: </span><span class="si">{</span><span class="n">res</span><span class="p">[</span><span class="s1">&#39;value&#39;</span><span class="p">]</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+<span class="k">else</span><span class="p">:</span>
+    <span class="nb">print</span><span class="p">(</span><span class="nb">int</span><span class="p">(</span><span class="n">res</span><span class="p">[</span><span class="s1">&#39;value&#39;</span><span class="p">]))</span>
+</pre></div>
+</div>
+</section>
+<section id="topology">
+<h3>Topology<a class="headerlink" href="#topology" title="Permalink to this heading"></a></h3>
+<p>The example usages shown above ausme that the server and the client are both running
+on the same machine. Which is why the endpoint to which the client connects is <code class="docutils literal notranslate"><span class="pre">127.0.0.1</span></code>:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">client</span> <span class="o">=</span> <span class="n">arduino_iface</span><span class="o">.</span><span class="n">ArduinoClient</span><span class="p">(</span><span class="s2">&quot;tcp://127.0.0.1:4555&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>In case of different topology LAN/WAN this endpoint should be changed.</p>
+<p><em>LAN Example</em></p>
+<img class="img__wrap" src="../_static/topology.png" />
+<p>In this scenario if the server is deployed on a machine with IPv4 address: <code class="docutils literal notranslate"><span class="pre">192.168.0.3</span></code>
+the client should be within the same network and initialized like this</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">client</span> <span class="o">=</span> <span class="n">arduino_iface</span><span class="o">.</span><span class="n">ArduinoClient</span><span class="p">(</span><span class="s2">&quot;tcp://192.168.0.3:4555&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</section>
+</section>
+</section>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="../quickstart.html" class="btn btn-neutral float-left" title="QuickStart" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="../examples.html" class="btn btn-neutral float-right" title="Examples" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2023, Iliya Iliev.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

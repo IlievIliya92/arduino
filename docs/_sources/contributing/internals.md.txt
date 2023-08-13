@@ -1,0 +1,10 @@
+# Internals
+
+## Repository Layout
+
+- `arduino_iface` -- Python package containing Arduino Server & Client API
+- `docs` -- DOCs directory
+- `docs_src` -- DOCs sources
+- `LICENSE` -- License file
+- `README.md` -- Readme file
+- `sketch` -- Arduino UNO source code

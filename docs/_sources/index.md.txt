@@ -1,0 +1,45 @@
+---
+hide-toc: true
+---
+
+# Arduino Project
+
+The purpouse of this documentation is to provide guidance on how to install and use
+the artefacts of this repository.
+
+The project consits of:
+
+* Arduino sketch
+* Python server procesing TCP to Serial communication
+* Python client API
+* Documentaion
+
+## Project Goals
+
+The goal of the project is to provide an easy way to control Arduino board over a remote
+TCP connection. The project is oriented mainly towards entry level embedded developers.
+
+```{toctree}
+:caption: Usage
+:hidden:
+
+quickstart
+client_api/index
+examples
+```
+
+```{toctree}
+:caption: Development
+:hidden:
+
+contributing/index
+changelog
+license
+```
+
+```{toctree}
+:caption: Support
+:hidden:
+
+support
+```

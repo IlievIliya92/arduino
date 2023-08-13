@@ -1,0 +1,57 @@
+# Examples
+
+Example application showing how to automatically send command to enable IR controled
+LED strip when the luminosity level is low.
+
+```python
+# --- Imports ---#
+import sys
+import time
+import signal
+
+import arduino_iface
+
+# --- Constants ---#
+SAMPLING_PERIOD = 1
+LIGHT_TRESHHOLD = 600
+
+# --- State ---#
+STOP_APP=False
+
+def app_sig_int_handler(sig, frame):
+    del sig, frame
+
+    global STOP_APP
+    STOP_APP = True
+
+def main():
+    client = arduino_iface.ArduinoClient("tcp://127.0.0.1:4555")
+    signal.signal(signal.SIGINT, app_sig_int_handler)
+
+    while not STOP_APP:
+        res = client.send_cmd({"id": "luminosity_get"})
+        if res['status'] != 'ok':
+            print(f"Failed to retrieve luminosity value: {res['value']}")
+            continue
+
+        # If there is not enough light, turn it on
+        if int(res['value']) > LIGHT_TRESHHOLD:
+            res = client.send_cmd({"id": "ir_set", "value": "on"})
+            if res['status'] != 'ok':
+                print(f"Failed to turn on the lights: {res['value']}")
+                continue
+
+            res = client.send_cmd({"id": "ir_set", "value": "green"})
+            if res['status'] != 'ok':
+                print(f"Failed to change lights colour to green: {res['value']}")
+                continue
+
+        time.sleep(SAMPLING_PERIOD);
+
+    print("Stopping application ...")
+
+    return 0
+
+if __name__ == "__main__":
+    sys.exit(main())
+```

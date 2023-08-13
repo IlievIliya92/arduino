@@ -1,0 +1,220 @@
+<style>
+    .img__wrap {
+        border: 1px solid;
+        padding: 10px;
+        box-shadow: 18px 5px 10px #888888;
+    }
+</style>
+
+# Client API
+
+## Commands
+
+### Reset state
+
+*@Brief:* Reset state of PIR & button
+
+*@Request:*
+
+| id              |
+|-----------------|
+| "clear_state"   |
+
+*@Response:*
+
+| status          | value           |
+|-----------------|-----------------|
+| "ok"            | 0               |
+| "error"         | "Error message" |
+
+**Example Usage:**
+
+```python
+import arduino_iface
+
+client = arduino_iface.ArduinoClient("tcp://127.0.0.1:4555")
+res = client.send_cmd({"id": "clear_state"})
+if res['status'] != 'ok':
+    print(res['value'])
+```
+
+### IR
+
+*@Brief:* Send an IR command
+
+*@Request:*
+
+| id         |
+|------------|
+| "ir_set"   |
+
+|  value     |
+|------------|
+| "intensityup" |
+| "intensitydown" |
+| "off" |
+| "on" |
+| "red" |
+| "green" |
+| "blue" |
+| "white" |
+| "rust" |
+| "palegreen" |
+| "azure" |
+| "flash" |
+| "redorange" |
+| "turquoise" |
+| "eggplant" |
+| "strobe" |
+| "orange" |
+| "emerald" |
+| "purple" |
+| "fade" |
+| "yellow" |
+| "jade" |
+| "pink" |
+| "smooth" }
+
+*@Response:*
+
+| status          | value           |
+|-----------------|-----------------|
+| "ok"            | 0               |
+| "error"         | "Error message" |
+
+The values are mapped 1:1 to IR button codes of the remote control  used to control an [LED strip](https://www.emag.bg/lenta-mercado-trade-dekorativna-led-lampichki-distancionno-cvetna-3m-423/pd/DGWSWRMBM/).
+
+**Example Usage:**
+
+```python
+import arduino_iface
+
+client = arduino_iface.ArduinoClient("tcp://127.0.0.1:4555")
+res = client.send_cmd({"id": "ir_set", "value": "on"})
+res = client.send_cmd({"id": "ir_set", "value": "green"})
+if res['status'] != 'ok':
+    print(f"Err: {res['value']}")
+```
+
+```{note}
+The IR received is disabled by default since it is used for debugging purpouses only.
+To enable it uncomment the `// #define ENABLE_IR_RECV` line from the `sketch.ino` file.
+```
+
+### PIR Get
+
+*@Brief:* Retrieve the state of the PIR sensor, the state is cleared on read. Each detected motion
+is stored as a flag and it maintains its state until read by the user application.
+
+*@Request:*
+
+| id         |
+|------------|
+| "pir_get"   |
+
+*@Response:*
+
+| status          | value           |
+|-----------------|-----------------|
+| "ok"            | 0 (Motion not detected) / 1 (Motion detected)    |
+| "error"         | "Error message" |
+
+**Example Usage:**
+
+```python
+import arduino_iface
+
+res = client.send_cmd({"id": "pir_get"})
+if res['status'] != 'ok':
+    print(f"Err: {res['value']}")
+else:
+    print(int(res['value']))
+```
+
+### Luminosity Get
+
+*@Brief:* Retrieve the current value meassured by the photo resistor sensor
+
+*@Request:*
+
+| id         |
+|------------|
+| "luminosity_get"   |
+
+*@Response:*
+
+| status          | value           |
+|-----------------|-----------------|
+| "ok"            | [ "0" ; "1024" ] (Value of the photo resistor)  |
+| "error"         | "Error message" |
+
+**Example Usage:**
+
+```python
+import arduino_iface
+
+res = client.send_cmd({"id": "luminosity_get"})
+if res['status'] != 'ok':
+    print(f"Err: {res['value']}")
+else:
+    print(int(res['value']))
+```
+
+### Button State Get
+
+*@Brief:* Retrieve the state of a button, the state is cleared on read. Each button
+press is stored as a flag and it maintains its state until read by the user application.
+
+*@Request:*
+
+| id         |
+|------------|
+| "key_get"   |
+
+|  value     |
+|------------|
+| "btn1" |
+| "btn2" |
+| "btn3" |
+| "btn4" |
+
+*@Response:*
+
+| status          | value           |
+|-----------------|-----------------|
+| "ok"            |  0 (Key pressed) / 1 (Key IDLE)     |
+| "error"         | "Error message" |
+
+**Example Usage:**
+
+```python
+import arduino_iface
+res = client.send_cmd({"id": "key_get", "value": "btn1"})
+
+if res['status'] != 'ok':
+    print(f"Err: {res['value']}")
+else:
+    print(int(res['value']))
+```
+
+### Topology
+
+The example usages shown above ausme that the server and the client are both running
+on the same machine. Which is why the endpoint to which the client connects is `127.0.0.1`:
+
+```python
+client = arduino_iface.ArduinoClient("tcp://127.0.0.1:4555")
+```
+
+In case of different topology LAN/WAN this endpoint should be changed.
+
+*LAN Example*
+
+<img class="img__wrap" src="../_static/topology.png" />
+
+In this scenario if the server is deployed on a machine with IPv4 address: `192.168.0.3`
+the client should be within the same network and initialized like this
+
+```python
+client = arduino_iface.ArduinoClient("tcp://192.168.0.3:4555")
+```

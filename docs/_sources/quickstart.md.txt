@@ -1,0 +1,102 @@
+<style>
+    .img__wrap {
+        border: 1px solid;
+        padding: 10px;
+        box-shadow: 18px 5px 10px #888888;
+    }
+</style>
+
+# QuickStart
+
+```{contents}
+:depth: 3
+```
+
+## Setup
+
+### Components
+
+* [Arduino UNO (Atmega-328p)](https://elimex.bg/product/71190-kit-k2000-razvoyna-platka-s-atmega-328p)
+* [IR Emitter](https://elimex.bg/product/85024-kit-k2238-ir-predavatelen-modyl-38khz?fbclid=IwAR3VVIv3W75pLZJC_mgmLN6cP2sbzGf1MBW3TK8MSVMtoTuQ6K2VncmCztQ)
+* [IR Receiver](https://elimex.bg/product/74794-kit-k2056-ir-priemen-modul-38khz?fbclid=IwAR3WbpsbBnQvC3e3oVXj26KnxDGqICMOeUiHXHCe56j38m88hdxKyFofgYA)
+* [1x4 Keypad](https://elimex.bg/product/77710-kit-k2168-1x4-matrichna-klaviatura-s-4-butonapanelen-tip?fbclid=IwAR3VVIv3W75pLZJC_mgmLN6cP2sbzGf1MBW3TK8MSVMtoTuQ6K2VncmCztQ)
+* [Photo Resistor](https://elimex.bg/product/74793-kit-k2055-fotorezistoren-datchik?fbclid=IwAR3VVIv3W75pLZJC_mgmLN6cP2sbzGf1MBW3TK8MSVMtoTuQ6K2VncmCztQ)
+* [PIR Sensor](https://elimex.bg/product/71202-kit-k2015-pir-%E2%80%93-senzor-za-dvizhenie)
+
+### Schematic
+
+Wire the compoments using the schematic shown below:
+
+<img class="img__wrap" src="_static/schematic.png" />
+
+## Arduino
+
+### Dependencies
+
+* [IRremote Arduino library](https://www.arduino.cc/reference/en/libraries/irremote/)
+
+### Setup
+
+1. Load the sketch file
+
+Using the [Arduino IDE](https://docs.arduino.cc/software/ide-v1/tutorials/Linux) load the sketch file `sketch.ino`
+which resides in the `sketch` directory.
+
+<img class="img__wrap" src="_static/0_load.png" />
+
+2. Verify (build)
+
+<img class="img__wrap" src="_static/1_build.png" />
+
+3. Flash
+
+<img class="img__wrap" src="_static/2_flash.png" />
+
+4. Test
+
+Test the setup using the integrated serial monitor by sending `3` to the target board
+which should result in returning the value read by the photo resistor.
+
+<img class="img__wrap" src="_static/3_test.png" />
+
+## Arduino Server
+
+1. Install
+
+To install the python package containg the Arduino server:
+
+```console
+cd arduino_iface
+pip3 install .
+```
+
+2. Start the server
+
+```console
+arduino_server --serial_port <path_to_arduino_serial_port>
+```
+
+3. Test
+
+```console
+cd arduino_iface/test
+pytest -vv
+```
+
+Optionally you can install the Arduino Server as a SystemD service using the example
+file provided in the `arduino_iface/init/systemd` direcotry.
+
+**This file requires the following modifications:**
+
+Change `@@__USER__@@` and `@@__GROUP__@@` accordingly. You can ge this information by using the `whoami` command.
+
+Change `@@__PATH_TO_ARDUINO_SERVER_DIR__@@/arduino_server` to the correct path where the binary has been installed. You can get this infromation by using the `which rduino_server` command.
+
+To get the correct path for the serial port look for the Arduino device in the  `/dev/serial/by-id/` directory.
+
+Once the file has benn modified copy it in the */etc/systemd/system/* directory and start the service using the commands below:
+
+```console
+sudo systemctl start arduino-server.service
+sudo systemctl enable arduino-server.service
+```
