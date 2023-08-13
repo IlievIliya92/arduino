@@ -31,9 +31,12 @@
 #define IR_CMDS_N 24
 #define PAD_KEYS_N 4
 
+// #define ENABLE_IR_RECV
 /*** PIN MUX ***/
 /* Digital */
+#ifdef ENABLE_IR_RECV
 #define RECV_PIN 2
+#endif
 #define SEND_PIN 3
 #define PIR_SENSOR_PIN 4
 #define KEY_PAD_4 9 
@@ -69,7 +72,9 @@ static bool i_cmd_complete = false;
 static volatile int pir_state = LOW; // we start, assuming no motion detected           
 
 /* IR */
+#ifdef ENABLE_IR_RECV
 IRrecv irrecv(RECV_PIN);
+#endif
 IRsend irsend(SEND_PIN);
 
 /* KEY PAD */
@@ -100,7 +105,9 @@ void setup(){
   pinMode(LED_PIN, OUTPUT);
   
   /* IR */
+#ifdef ENABLE_IR_RECV
   irrecv.enableIRIn();
+#endif
   irsend.enableIROut(38);
 
   /* PIR */
@@ -143,10 +150,12 @@ void ir_cmd_handler(uint8_t *cmd, uint8_t  cmd_len) {
   if (ir_cmd_id >= 0 && ir_cmd_id < IR_CMDS_N) {  
     unsigned long ir_out_value = ir_commands[ir_cmd_id];
     irsend.sendNECRaw(ir_out_value, 32);
+#ifdef ENABLE_IR_RECV
     if (irrecv.decode()){
-      //Serial.println(irrecv.decodedIRData.decodedRawData, HEX);     
+      // Serial.println(irrecv.decodedIRData.decodedRawData, HEX);
       irrecv.resume();
     }
+#endif
     send_response(0);
   } else {
     send_response(-1);
