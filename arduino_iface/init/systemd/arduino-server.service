@@ -4,8 +4,10 @@ After=multi-user.target
 
 [Service]
 Type=simple
+User=@@__USER__@@
+Group=@@__GROUP__@@
 Restart=always
-ExecStart=/path/to/arduino_server
+ExecStart=@@__PATH_TO_ARDUINO_SERVER_DIR__@@/arduino_server --serial_port /dev/serial/by-id/usb-Arduino__www.arduino.cc__0043_7543931353735151C0A2-if00
 
 [Install]
 WantedBy=multi-user.target
