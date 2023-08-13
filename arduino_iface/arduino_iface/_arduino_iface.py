@@ -131,8 +131,7 @@ class ArduinoServer():
                 response = {}
                 request_raw = self.socket.recv()
                 request = str_to_JSON(request_raw.decode())
-                self.log.debug(f"Request: {request}")
-
+                self.log.debug(f"→  Request: {request}")
                 cmd_id = request['id']
                 if cmd_id not in ARDUINO_CMDS.keys():
                     response = self.format_response("error", f"Invalid cmd id: {cmd_id}")
@@ -144,10 +143,10 @@ class ArduinoServer():
                     if 'value' in request.keys():
                         arduino_req = arduino_req.format(value=ARDUINO_CMDS[cmd_id]['value'][request['value']])
 
-                    self.log.debug(f"Arduino Serial Request: {arduino_req}")
+                    self.log.debug(f"→  Arduino Serial Request: {arduino_req}")
                     self.serial.write(arduino_req)
                     arduino_res = self.serial.read()
-                    self.log.debug(f"Arduino Serial Response: {arduino_res}")
+                    self.log.debug(f"←  Arduino Serial Response: {arduino_res}")
                 except ValueError as err:
                     response = self.format_response("error", f"Failed to send cmd: {err}!")
 
@@ -156,7 +155,7 @@ class ArduinoServer():
                 else:
                     response = self.format_response("ok", arduino_res)
 
-                self.log.debug(f"Response: {response}")
+                self.log.debug(f"←  Response: {response}")
                 response_raw = JSON_to_str(response).encode()
                 self.socket.send(response_raw)
 
@@ -182,5 +181,6 @@ class ArduinoClient():
             response = str_to_JSON(response_raw.decode())
         except Exception as err:
             self.log.error(f"--- Err: {err}")
+        self.log.info(f"\n←  Response:\n{json.dumps(response, sort_keys=True, indent=4)}")
 
         return response
